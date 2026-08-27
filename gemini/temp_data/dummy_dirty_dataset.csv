@@ -1,0 +1,199 @@
+id,name,age,signup_date,country,salary,email
+1,Bob Smith,65,2023-03-13,Canada,49628,bob.smith@email.com
+2,Mia Brown,N/A,02/17/2023,Mexico,36952,mia.brown@email.com
+3,Tom Scott,56,2023/10/07,us,48031,tom.scott@email.com
+4,Tom Young,55,2023/03/23,Canada,84729,tom.young@email.com
+5,  David Patel,27,2023/02/17,United Kingdom,41698,david.patel@email.com
+6,BOB LEWIS,40,2023/01/23,germany,,BOB.LEWIS@EMAIL.COM
+7,Mia White,42,07/05/2023,us,54213,mia.white@email.com
+8,Alice Doe,60,2023-04-30,United Kingdom,40229,alice.doe@email.com
+9,James Patel,47,09-07-2023,australia,45659,james.patel@email.com
+10,Sara Patel,62,03/29/2023,AUS,39679,sara.patel@email.com
+11,Mike Young,42,10/13/2023,CANADA,80099,mike.young@email.com
+12,  David Doe,32,2023-05-18,United States,61290,david.doe@email.com
+13,Sara Adams,63,2023/09/13,Canada,77954,sara.adams@email.com
+14,Daniel Diaz,34,15-10-2023,U.K.,83823,daniel.diaz@email.com
+15,Ryan Hall,55,2023/03/12,mexico,49373,ryan.hall@email.com
+16,Alice Doe,25,2023-08-05,U.K.,86909,alice.doe@email.com
+17,James Walker,56,2023-10-11,MX,51476,james.walker@email.com
+18,Bob Green,35,2023/05/31,australia,42310,BOB.GREEN@EMAIL.COM
+19,Mike Young,18,09/14/2023,AUS,52261,MIKE.YOUNG@EMAIL.COM
+20,Chris White,58,04/12/2023,CANADA,68270,chris.white@email.com
+21,Laura Jones,52,2023/06/15,Germany,74252,laura.jones@email.com
+22,John White,41,2023-05-04,Canada,38796,john.white@email.com
+23,Alice Allen,22,09/01/2023,Germany,43414,alice.allen@email.com
+24,Nina Scott,56,13-04-2023,Mexico,70343,nina.scott@email.com
+25,James Lewis,46,05/07/2023,germany,42930,james.lewis@email.com
+26,Alice Clark,19,2023-04-23,DE,50080,alice.clark@email.com
+27,Alice Doe,32,2023-06-19,USA,91337,alice.doe@email.com
+28,CHRIS KING,35,10/04/2023,australia,49040,chris.king@email.com
+29,Ryan Adams,48,07/28/2023,uk,87920,ryan.adams@email.com
+30,Bob White,60,2023/07/30,mexico,62759,BOB.WHITE@EMAIL.COM
+31,Jane White,21,02/25/2023,MX,57236,jane.white@email.com
+32,Sara Lee,52,04-04-2023,Mexico,62648,sara.lee@email.com
+33,Daniel King,22,2023-01-26,MX,41416,DANIEL.KING@EMAIL.COM
+34,alice king,28,2023/04/20,mexico,66546,alice.king@email.com
+35,Jane Jones,42,21-08-2023,U.S.A.,52380,JANE.JONES@EMAIL.COM
+36,Sophia Green,60,08-04-2023,australia,45144,sophia.green@email.com
+37,Sara Doe  ,55,2023-06-10,AUS,38994,sara.doe@email.com
+38,Jane Adams,48,2023-01-30,DE,45317,jane.adams@email.com
+39,Mike Brown  ,56,03/03/2023,usa,,mike.brown@email.com
+40,Ryan Baker,20,26-10-2023,Germany,62474,ryan.baker@email.com
+41,Nina Lee,60,2023/05/16,australia,50642,nina.lee@email.com
+42,Carla Wilson,47,2023-08-23,Canada,999999,carla.wilson@email.com
+43,Alice Green,31,2023-06-28,germany,43680,alice.green@email.com
+44,Tom Lewis,36,06-10-2023,uk,89640,tom.lewis@email.com
+45,Grace Scott,,02/23/2023,AUS,54620,grace.scott@email.com
+46,Nina White,24,20-05-2023,AUS,45187,nina.white@email.com
+47,Grace Lee,63,2023/05/16,Canada,80055,grace.lee@email.com
+48,Nina Doe,23,2023-05-22,australia,89352,nina.doe@email.com
+49,John Clark,26,2023/08/15,australia,45589,john.clark@email.com
+50,Mia Smith  ,25,19-01-2023,usa,70755,mia.smith@email.com
+51,RYAN GREEN,27,07-06-2023,Mexico,37741,ryan.green@email.com
+52,Jane Lewis,31,22-02-2023,Australia,78708,
+53,mia hall,57,03/25/2023,Australia,50514,mia.hall@email.com
+54,Sophia Smith,29,07/30/2023,australia,86274,sophia.smith@email.com
+55,  Nina Jones,62,2023/01/20,U.S.A.,92158,nina.jones@email.com
+56,Tom Lee,47,04/27/2023,canada,88774,tom.lee@email.com
+57,John Lee,43,05-02-2023,canada,91646,john.lee@email.com
+58,Laura Scott,43,2023-01-15,AUS,56702,laura.scott@email.com
+59,Nina Jones,55,11-08-2023,Canada,42104,nina.jones@email.com
+60,David Hall,56,10/23/2023,Germany,60244,david.hall@email.com
+61,Nina Doe,63,10/03/2023,Mexico,69073,nina.doe@email.com
+62,Laura Hall,22,2023-06-10,australia,75839,LAURA.HALL@EMAIL.COM
+63,Emily Scott,37,26-07-2023,australia,56376,emily.scott@email.com
+64,Mia Diaz,30,31-03-2023,MX,59847,mia.diaz@email.com
+65,James Green,N/A,09-08-2023,canada,48774,james.green@email.com
+66,Daniel Young,46,08/31/2023,Australia,68500,daniel.young@email.com
+67,Alice Wilson,50,2023-06-21,AUS,75583,alice.wilson@email.com
+68,Tom Wilson,32,01/24/2023,U.K.,36600,tom.wilson@email.com
+69,Olivia Baker,22,10/22/2023,mexico,93073,olivia.baker@email.com
+70,  James Allen,43,2023-01-03,U.K.,77995,james.allen@email.com
+71,Sophia King,29,01/26/2023,AUS,65444,sophia.king@email.com
+72,Bob Young  ,26,14-10-2023,MX,69808,bob.young@email.com
+73,Daniel Baker,64,2023/10/08,germany,89432,daniel.baker@email.com
+74,  Mike Allen,46,2023/05/22,Canada,90041,mike.allen@email.com
+75,Tom Patel,46,20-05-2023,United States,50367,tom.patel@email.com
+76,David Green,23,07/16/2023,U.K.,50155,DAVID.GREEN@EMAIL.COM
+77,Sara Brown,44,2023/08/27,mexico,70560,sara.brown@email.com
+78,Jane Lee,44,2023/01/11,MX,80581,jane.lee@email.com
+79,Olivia Smith,40,08/03/2023,canada,90931,olivia.smith@email.com
+80,Olivia King,35,19-07-2023,mexico,36902,olivia.king@email.com
+81,James Jones,47,2023-07-21,UK,94436,james.jones@email.com
+82,Alice Hall,26,2023/05/14,Mexico,38295,alice.hall@email.com
+83,David Lee,47,14-07-2023,canada,84887,david.lee@email.com
+84,Sophia Patel,23,2023-10-04,Mexico,84088,sophia.patel@email.com
+85,LAURA KING,59,01/16/2023,USA,84429,laura.king@email.com
+86,Sara Smith,57,2023-08-31,U.K.,43272,sara.smith@email.com
+87,Ryan Lee  ,47,07/08/2023,australia,85259,ryan.lee@email.com
+88,Grace Baker,65,25-03-2023,Australia,85973,grace.baker@email.com
+89,Bob Adams,19,2023/07/12,CANADA,79390,bob.adams@email.com
+90,Sara Brown,55,22-02-2023,AUS,50915,
+91,Grace White,54,08-08-2023,United States,69913,GRACE.WHITE@EMAIL.COM
+92,Alice Scott,59,2023/08/04,Canada,90677,alice.scott@email.com
+93,Bob Hall,41,2023/03/20,australia,81354,bob.hall@email.com
+94,Mike Scott,59,2023/10/03,CANADA,87966,mike.scott@email.com
+95,Daniel Hall,64,2023-05-06,germany,56122,DANIEL.HALL@EMAIL.COM
+96,Nina Young,33,14-07-2023,MX,74998,nina.young@email.com
+97,John Allen,38,01-07-2023,uk,48901,john.allen@email.com
+98,David Patel,56,01/06/2023,australia,71424,david.patel@email.com
+99,Alice King,64,2023/05/04,mexico,71384,alice.king@email.com
+100,Olivia Young,19,07/27/2023,United States,49522,olivia.young@email.com
+101,Emily Adams,41,2023/06/26,MX,69794,emily.adams@email.com
+102,Mia Clark,40,06-06-2023,australia,52754,mia.clark@email.com
+103,Tom White,64,10/02/2023,United Kingdom,999999,
+104,Sara Lee  ,65,26-09-2023,mexico,82486,sara.lee@email.com
+105,Bob Lee,36,2023-06-04,United Kingdom,46759,bob.lee@email.com
+106,Mia Diaz  ,35,05/30/2023,USA,71264,mia.diaz@email.com
+107,Olivia White,18,2023/09/03,germany,,
+108,David Jones  ,21,2023/02/03,canada,42476,david.jones@email.com
+109,Olivia Brown,54,03/19/2023,AUS,38513,olivia.brown@email.com
+110,Ryan Wilson,N/A,08/02/2023,UK,71573,ryan.wilson@email.com
+111,Chris Walker,46,08-08-2023,mexico,91371,chris.walker@email.com
+112,Ryan Baker,21,04/17/2023,DE,41503,ryan.baker@email.com
+113,Nina Brown,28,02/08/2023,U.K.,71175,nina.brown@email.com
+114,John Hall,46,2023-05-30,AUS,65796,john.hall@email.com
+115,Tom Wilson,63,2023-08-21,CANADA,91335,tom.wilson@email.com
+116,Tom Patel,58,2023/04/12,DE,87684,tom.patel@email.com
+117,Bob Green,32,05/17/2023,Australia,94533,bob.green@email.com
+118,Alice Doe,,19-10-2023,CANADA,84083,alice.doe@email.com
+119,Daniel White,47,26-07-2023,australia,80857,daniel.white@email.com
+120,Chris Green,49,2023/01/21,Mexico,74192,chris.green@email.com
+121,David Baker,34,2023-10-22,USA,50002,david.baker@email.com
+122,Nina Adams,20,15-08-2023,uk,69010,nina.adams@email.com
+123,Mike Adams,45,29-08-2023,australia,40979,mike.adams@email.com
+124,Sophia Clark,38,24-03-2023,Australia,91212,sophia.clark@email.com
+125,Sophia Allen  ,36,2023-10-09,australia,88317,sophia.allen@email.com
+126,Daniel Brown,38,2023-07-26,canada,-1000,DANIEL.BROWN@EMAIL.COM
+127,Mia Young,44,2023/07/05,usa,68976,mia.young@email.com
+128,Daniel Doe,31,2023/05/28,CANADA,43586,DANIEL.DOE@EMAIL.COM
+129,OLIVIA WHITE,19,05/03/2023,AUS,87383,OLIVIA.WHITE@EMAIL.COM
+130,Emily Green,18,2023-04-26,germany,41108,
+131,Daniel White,59,30-05-2023,uk,81963,daniel.white@email.com
+132,Sophia Allen,,2023/03/16,uk,71127,sophia.allen@email.com
+133,Sara Baker,50,05-02-2023,Australia,91624,sara.baker@email.com
+134,Sophia Clark,50,2023/06/02,Canada,53536,sophia.clark@email.com
+135,Carla Young,52,2023/10/10,mexico,56786,carla.young@email.com
+136,Daniel Clark,30,07/16/2023,Australia,72473,daniel.clark@email.com
+137,Sophia Doe,38,2023/07/15,australia,81217,SOPHIA.DOE@EMAIL.COM
+138,  Carla Allen,20,2023/02/21,United Kingdom,91996,carla.allen@email.com
+139,BOB SCOTT,47,2023-03-21,usa,61868,bob.scott@email.com
+140,olivia patel,39,11-02-2023,DE,61049,olivia.patel@email.com
+141,Mia Walker,38,2023-09-07,AUS,93159,mia.walker@email.com
+142,Grace Brown,33,2023-04-27,AUS,53833,grace.brown@email.com
+143,Sophia White,58,27-03-2023,Australia,64076,sophia.white@email.com
+144,John Doe,38,2023/07/11,United States,58492,john.doe@email.com
+145,Carla King,51,04/03/2023,MX,79682,carla.king@email.com
+146,Mike Brown,57,2023/05/04,MX,79769,mike.brown@email.com
+147,Ryan Diaz,32,24-08-2023,MX,51644,ryan.diaz@email.com
+148,John Young  ,36,2023/02/07,AUS,45353,john.young@email.com
+149,Laura Adams,37,2023/05/09,australia,80240,laura.adams@email.com
+150,Emily Lee,42,15-07-2023,Mexico,50545,emily.lee@email.com
+151,ryan wilson,62,22-07-2023,Canada,89397,ryan.wilson@email.com
+152,John Adams,61,12-09-2023,Australia,94678,john.adams@email.com
+153,Tom Baker,,05/09/2023,U.K.,75690,tom.baker@email.com
+154,Bob Doe,37,07/06/2023,Mexico,72982,BOB.DOE@EMAIL.COM
+155,Alice Wilson,38,04/13/2023,australia,,alice.wilson@email.com
+156,Mia Lewis,51,26-03-2023,germany,89425,mia.lewis@email.com
+157,olivia wilson,65,02/08/2023,Canada,65692,olivia.wilson@email.com
+158,Tom Walker,53,2023-07-22,Canada,86818,tom.walker@email.com
+159,Nina Green,25,2023/05/15,mexico,79094,nina.green@email.com
+160,laura white,61,15-10-2023,uk,36640,laura.white@email.com
+161,Grace King,59,2023/06/04,U.S.A.,94597,grace.king@email.com
+162,Bob Diaz,20,2023-03-01,United States,67284,bob.diaz@email.com
+163,Tom Green,26,2023/10/04,mexico,59314,tom.green@email.com
+164,Ryan Diaz,44,2023/09/08,Australia,89636,ryan.diaz@email.com
+165,Nina Doe,,08/16/2023,Canada,64057,nina.doe@email.com
+166,Laura White  ,61,2023-07-03,CANADA,94093,laura.white@email.com
+167,James Patel,30,2023-04-19,U.S.A.,41007,james.patel@email.com
+168,Jane Clark,33,10/11/2023,U.K.,39496,jane.clark@email.com
+169,  Ryan Lee,32,02-01-2023,Canada,86684,ryan.lee@email.com
+170,Carla Diaz,52,01/14/2023,Canada,42204,carla.diaz@email.com
+171,John Lewis,33,31-03-2023,germany,36034,john.lewis@email.com
+172,  Jane Diaz,65,2023/02/02,MX,42448,jane.diaz@email.com
+173,Daniel Lewis,50,09/15/2023,Germany,64622,daniel.lewis@email.com
+174,Grace Doe,64,2023-08-23,AUS,54767,grace.doe@email.com
+175,Jane Allen,43,2023/09/09,MX,42075,jane.allen@email.com
+176,Alice Brown,38,06-03-2023,Germany,39304,ALICE.BROWN@EMAIL.COM
+177,Grace Adams,53,29-09-2023,australia,,grace.adams@email.com
+178,  Daniel Scott,56,02/28/2023,Mexico,86976,daniel.scott@email.com
+179,Sophia Young,32,2023/08/21,mexico,89225,sophia.young@email.com
+180,  Sophia White,N/A,11-05-2023,mexico,78588,sophia.white@email.com
+181,Olivia Brown,54,03/19/2023,AUS,38513,olivia.brown@email.com
+182,  Daniel Scott,56,02/28/2023,Mexico,86976,daniel.scott@email.com
+183,alice king,28,2023/04/20,mexico,66546,alice.king@email.com
+184,Mike Adams,45,29-08-2023,australia,40979,mike.adams@email.com
+185,Mike Young,18,09/14/2023,AUS,52261,MIKE.YOUNG@EMAIL.COM
+186,Nina Jones,55,11-08-2023,Canada,42104,nina.jones@email.com
+187,Alice King,64,2023/05/04,mexico,71384,alice.king@email.com
+188,Alice Allen,22,09/01/2023,Germany,43414,alice.allen@email.com
+189,Alice Doe,32,2023-06-19,USA,91337,alice.doe@email.com
+190,James Jones,47,2023-07-21,UK,94436,james.jones@email.com
+191,Daniel Hall,64,2023-05-06,germany,56122,DANIEL.HALL@EMAIL.COM
+192,Sara Brown,44,2023/08/27,mexico,70560,sara.brown@email.com
+193,Carla Walker,thirty-two,03/10/2023,USA,not available,carla.walker@email.com
+194,Chris Adams,thirty-two,01/05/2023,U.S.A.,not available,chris.adams@email.com
+195,Laura Lee,thirty-two,2023/03/19,us,not available,laura.lee@email.com
+196,Daniel Lee,thirty-two,2023-02-14,usa,not available,daniel.lee@email.com
+197,Bob Adams,thirty-two,16-07-2023,U.S.A.,not available,bob.adams@email.com
+198,David Diaz,thirty-two,07-05-2023,USA,not available,david.diaz@email.com
