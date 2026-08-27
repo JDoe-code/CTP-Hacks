@@ -30,3 +30,39 @@ Output:
 -Explanation of steps taken by Google Gemini API to perform cleaning, as well as side-by-side comparison of the input data and output file
 
 -Works with tabular and formatted data. Can also input raw .txt, but the input consists of a file, prompt, and optional choices of the output file format.  
+
+
+# HOW TO RUN
+
+Backend:
+
+When building locally the first time, create a virtual environment .venv like so:
+
+macOS / Linux:
+cd backend
+python3 -m venv .venv 
+
+Windows: 
+cd backend
+py -3 -m venv .venv
+
+
+Only needs to be built once. Once built, activate with:
+
+macOS / Linux:
+. .venv/bin/activate
+
+Windows:
+.venv\Scripts\activate
+
+Environment variable(s) being read in: 
+GEMINI_API
+
+Once built, to download dependencies and requirements, use:
+pip3 install -r requirements.txt
+
+To run the backend:
+cd backend
+flask run
+
+Frontend:
