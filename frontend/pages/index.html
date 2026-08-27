@@ -8,32 +8,31 @@
     <link rel="stylesheet" href="../styles/index.css">
   </head>
   <body>
-    <h1>Hello, world</h1>
-    <p>Welcome to Simplify!</p>
+    <h1>Welcome to Simplify!</h1>
     <script src="index.js"></script>
 <div class="Simplify">
-        <form id="upflie">
-            <div class="flie">
+        <form id="upload">
+            <div class="file">
                 <label for="input">Upload File:</label>
                 <input type="file" id="input" required>
             </div>
 
-            <div class="form-gruep">
+            <div class="form-group">
                 <label for="rawText">Paste Raw Data:</label>
                 <textarea id="rawText" placeholder="Paste your raw data here"></textarea>
             </div>
 
-            <div class="form-gruep">
+            <div class="form-group">
                 <label for="prompt">Prompt:</label>
                 <textarea id="prompt" placeholder="Enter instructions for Gemini"></textarea>
             </div>
 
-            <div class="flie">
+            <div class="file">
                 <label for="option">Export Format:</label>
                 <select id="option">
                     <option value=".csv">.csv</option>
                     <option value=".tsv">.tsv</option>
-                    <option value=".json">.JSON</option>
+                    <option value=".json">.json</option>
                     <option value=".parquet">.parquet</option>
                 </select>
             </div>
@@ -52,25 +51,8 @@
             <button type="submit" id="submit">Clean Data</button>
         </form>
 
-        <div id="load" class="hidden">Cleaning</div>
-
-        <div id="results" class="hidden">
-            <h2>Summary Stats</h2>
-            <div id="summarysta"></div>
-
-                   <h2>Data Visualizations</h2>
-            <div id="chartsContainer"></div>
-
-            <h2>After Comparison</h2>
-            <div class="preview-container">
-                <div>
-                    <h3>Original Raw Data</h3>
-                    <pre id="beforePreview"></pre>
-                </div>
-                <div>
-                    <h3>Cleaned Output Data</h3>
-                    <pre id="afterPreview"></pre>
-                </div>
+        <div id="load" class="hidden">Cleaning...</div>
+        
         </div>
     </div>
 </body>
