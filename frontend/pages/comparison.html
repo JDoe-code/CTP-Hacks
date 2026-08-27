@@ -4,26 +4,162 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Home</title>
+    <title>Simplify - Before & After Data Comparison</title>
     <link rel="stylesheet" href="../styles/index.css">
     <link rel="stylesheet" href="../styles/comparison.css">
   </head>
   <body>
-    <h1>Before and After Data Comparison</h1>
-    <table class="center">
-        <thead>
-            <tr>
-                <th scope="col">Before</th>
-                <th scope="col">After</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row"></th>
-            </tr>
-        </tbody>
-    </table>
+    <div class="comparison-page-container">
+        <!-- Top Header & Action Buttons -->
+        <header class="header-section">
+            <div class="header-left">
+                <h1>Before and After Data Comparison</h1>
+                <p class="subtitle">Review the raw dataset against Gemini AI's cleaned, standardized, and validated output.</p>
+            </div>
+            <div class="header-actions">
+                <a href="index.html" class="btn btn-secondary">← Clean Another Dataset</a>
+                <button id="downloadBtn" class="btn btn-primary">⬇ Download Cleaned File</button>
+                <a href="visualizations.html" class="btn btn-tertiary">📊 Visualizations →</a>
+            </div>
+        </header>
+
+        <!-- Empty State Warning if no data -->
+        <div id="noDataState" class="empty-state hidden">
+            <div class="empty-icon">📂</div>
+            <h2>No Dataset Loaded Yet</h2>
+            <p>Please upload a dataset or paste raw data on the home page first to see the comparison.</p>
+            <a href="index.html" class="btn btn-primary">Go to Home & Clean Data</a>
+        </div>
+
+        <div id="mainComparisonContent">
+            <!-- Metrics Summary Cards -->
+            <section class="metrics-row">
+                <div class="metric-card">
+                    <div class="metric-label">Original Rows</div>
+                    <div class="metric-value" id="beforeRowCount">-</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Cleaned Rows</div>
+                    <div class="metric-value metric-success" id="afterRowCount">-</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Issues Detected</div>
+                    <div class="metric-value metric-warning" id="issuesCount">-</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Cleaning Steps</div>
+                    <div class="metric-value metric-info" id="stepsCount">-</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Output Format</div>
+                    <div class="metric-value" id="outputFormatBadge">-</div>
+                </div>
+            </section>
+
+            <!-- AI Cleaning Insights & Step Log Accordion -->
+            <section class="ai-report-section">
+                <div class="section-header">
+                    <h2>🤖 Gemini AI Cleaning Log & Diagnostics</h2>
+                </div>
+
+                <div class="report-grid">
+                    <!-- Issues Detected Card -->
+                    <div class="report-card">
+                        <h3>⚠️ Detected Issues (<span id="issuesTitleCount">0</span>)</h3>
+                        <ul id="issuesList" class="issues-list">
+                            <li>No issues reported.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Cleaning Steps Performed Card -->
+                    <div class="report-card report-card-wide">
+                        <h3>🛠️ Applied Cleaning Actions (<span id="stepsTitleCount">0</span>)</h3>
+                        <div id="stepsList" class="steps-container">
+                            <p class="empty-hint">No cleaning steps recorded.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Warnings Banner if present -->
+                <div id="warningsBanner" class="warnings-box hidden">
+                    <strong>⚠️ Notes & Assumptions:</strong>
+                    <ul id="warningsList"></ul>
+                </div>
+            </section>
+
+            <!-- Before & After Comparison Section -->
+            <section class="tables-section">
+                <div class="view-controls">
+                    <h2>Data Comparison Preview</h2>
+                    <div class="view-toggle-group">
+                        <button class="toggle-btn active" data-view="side-by-side">Side by Side</button>
+                        <button class="toggle-btn" data-view="before-only">Before (Original)</button>
+                        <button class="toggle-btn" data-view="after-only">After (Cleaned)</button>
+                    </div>
+                </div>
+
+                <div id="comparisonGrid" class="comparison-grid side-by-side">
+                    <!-- Left: Before (Original) Table -->
+                    <div class="table-card before-card">
+                        <div class="table-card-header">
+                            <div class="table-title">
+                                <span class="badge badge-before">BEFORE</span>
+                                <strong>Original Raw Data</strong>
+                            </div>
+                            <span class="row-badge" id="beforeTableBadge">0 rows</span>
+                        </div>
+                        <div class="table-scroll-wrapper">
+                            <table id="beforeTable" class="center data-table">
+                                <thead id="beforeTableHead">
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Loading...</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="beforeTableBody">
+                                    <tr>
+                                        <td colspan="2" class="empty-cell">No data</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Right: After (Cleaned) Table -->
+                    <div class="table-card after-card">
+                        <div class="table-card-header">
+                            <div class="table-title">
+                                <span class="badge badge-after">AFTER</span>
+                                <strong>Cleaned & Standardized Data</strong>
+                            </div>
+                            <span class="row-badge" id="afterTableBadge">0 rows</span>
+                        </div>
+                        <div class="table-scroll-wrapper">
+                            <table id="afterTable" class="center data-table">
+                                <thead id="afterTableHead">
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Loading...</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="afterTableBody">
+                                    <tr>
+                                        <td colspan="2" class="empty-cell">No data</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Hidden Server-Side Injected Data (if rendered via Flask template) -->
+    <script id="server-data" type="application/json">
+        {{ result | tojson | safe if result else "{}" }}
+    </script>
+
     <script src="index.js"></script>
-    <div id="visualization" class="visualization"></div>
 </body>
 </html>

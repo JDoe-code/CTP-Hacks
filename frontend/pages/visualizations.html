@@ -4,12 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Home</title>
+    <title>Simplify - Data Visualization</title>
     <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/comparison.css">
   </head>
   <body>
-    <h1>Data Visualization</h1>
+    <div class="comparison-page-container">
+        <header class="header-section">
+            <div class="header-left">
+                <h1>Data Visualization & Summary</h1>
+                <p class="subtitle">Visual distribution and cleaning overview of your dataset.</p>
+            </div>
+            <div class="header-actions">
+                <a href="index.html" class="btn btn-secondary">← Home</a>
+                <a href="comparison.html" class="btn btn-primary">🔍 Comparison View</a>
+            </div>
+        </header>
+
+        <div id="visualization" class="visualization">
+            <div id="vizEmptyState" class="empty-state">
+                <div class="empty-icon">📊</div>
+                <h2>Dataset Cleaning Visualizer</h2>
+                <p>Clean a dataset on the home page to view visual metrics and distributions.</p>
+                <a href="index.html" class="btn btn-primary">Upload & Clean Data</a>
+            </div>
+            <div id="vizContent" class="hidden">
+                <section class="metrics-row" id="vizMetrics"></section>
+                <section class="tables-section" id="vizCharts"></section>
+            </div>
+        </div>
+    </div>
     <script src="index.js"></script>
-<div id="visualization" class="visualization"></div>
 </body>
 </html>
