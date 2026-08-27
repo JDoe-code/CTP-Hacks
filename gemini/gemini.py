@@ -68,6 +68,7 @@ Regardless of format, also return, as a separate field/object (not mixed into
 the data output itself):
 - issues_found: list of detected problems (missing data, outliers, duplicates,
   formatting inconsistencies)
+- steps: sequential step-by-step breakdown of actions performed, with step number, action summary, affected column (if any), and detailed explanation of why and what changed
 - changes_made: list of every change applied, in the order applied
 - warnings: assumptions made or items that need user review
 
@@ -81,11 +82,22 @@ continue with the parts that are in scope.
 """
 
 
+class CleaningStep(BaseModel):
+    step_number: int = Field(description="Sequential step number (1, 2, 3, ...)")
+    action: str = Field(description="Short summary of the action taken (e.g. 'Standardize date format', 'Trim whitespace', 'Handle missing values')")
+    column: Optional[str] = Field(default=None, description="The column affected by this step, or null if dataset-wide")
+    details: str = Field(description="Detailed explanation of what was changed, row context, and rationale")
+
+
 class CleanedDatasetResult(BaseModel):
     cleaned_data: List[Dict[str, Any]] = Field(
         description="Cleaned rows as list of objects"
     )
     issues_found: List[str] = Field(description="List of detected issues")
+    steps: List[CleaningStep] = Field(
+        default_factory=list,
+        description="Step-by-step list of cleaning actions performed in order with details"
+    )
     changes_made: List[str] = Field(description="List of changes applied in order")
     warnings: List[str] = Field(description="Assumptions or warnings")
 
@@ -191,6 +203,7 @@ def clean_dataset(
         "extension": file_ext,
         "preview_data": cleaned_rows[:50],  # Top 50 rows for on-screen preview
         "issues_found": result.get("issues_found", []),
+        "steps": result.get("steps", []),
         "changes_made": result.get("changes_made", []),
         "warnings": result.get("warnings", []),
     }
@@ -208,7 +221,12 @@ if __name__ == "__main__":
         print(f"Extension: {res['extension']}")
         print(f"MIME type: {res['mime_type']}")
         print(f"Issues Found ({len(res['issues_found'])}):", res["issues_found"])
-        print(f"Changes Made ({len(res['changes_made'])}):", res["changes_made"])
+        print(f"\nSteps Performed ({len(res['steps'])}):")
+        for step in res["steps"]:
+            col_info = f" [Column: {step['column']}]" if step.get("column") else ""
+            print(f"  Step {step.get('step_number', '-')}: {step.get('action')}{col_info}")
+            print(f"    Details: {step.get('details')}")
+        print(f"\nChanges Made ({len(res['changes_made'])}):", res["changes_made"])
         print(f"Warnings ({len(res['warnings'])}):", res["warnings"])
         print(f"Preview rows: {len(res['preview_data'])}")
         print("First cleaned row:", res["preview_data"][0] if res["preview_data"] else "None")
