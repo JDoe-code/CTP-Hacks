@@ -1,18 +1,25 @@
 import os
-import pathlib
+import io
+import csv
 import json
+import base64
+
+import pathlib
+from urllib import parse
+import pandas as pd
+
+from typing import Any, Dict, List, Optional, Tuple
 from dotenv import load_dotenv
 from google import genai
+from pydantic import BaseModel, Field
 
 load_dotenv()
-# load key from .env
-gemini_api_key = os.getenv("GEMINIAPI")
+# load key from .env (supports GEMINIAPI or GEMINI_API_KEY)
+gemini_api_key = os.getenv("GEMINIAPI") or os.getenv("GEMINI_API_KEY")
 
-client = genai.Client(api_key=gemini_api_key)
+client = genai.Client(api_key=gemini_api_key) if gemini_api_key else None
 
-# system interaction
-
-instruction = """
+SYSTEM_INSTRUCTION = """
 You are the data cleaning engine for a data cleaning web application. Your sole
 purpose is to analyze and clean tabular datasets uploaded by users.
 
@@ -49,13 +56,13 @@ OUTPUT FORMAT
 The user selects one of four output formats: JSON, CSV, TSV, or Parquet.
 
 - If JSON, CSV, or TSV is selected: return the cleaned data directly in that
-  format, exactly as it should be written to file. Do not include commentary,
-  markdown code fences, or explanatory text inside this output — it must be
-  parseable as-is.
+    format, exactly as it should be written to file. Do not include commentary,
+    markdown code fences, or explanatory text inside this output — it must be
+    parseable as-is.
 - If Parquet is selected: you cannot emit binary Parquet directly. Return the
-  cleaned data as JSON instead, and include a field indicating the target
-  format is "parquet" so the application layer can convert it
-  (e.g. via pandas/pyarrow). Never claim to have produced a Parquet file yourself.
+    cleaned data as JSON instead, and include a field indicating the target
+    format is "parquet" so the application layer can convert it
+    (e.g. via pandas/pyarrow). Never claim to have produced a Parquet file yourself.
 
 Regardless of format, also return, as a separate field/object (not mixed into
 the data output itself):
@@ -73,22 +80,135 @@ data not present in the source), refuse that specific part of the request and
 continue with the parts that are in scope.
 """
 
-# testing
-current_dir = pathlib.Path(__file__).parent
-csv_path = current_dir / "temp_data" / "dummy_dirty_dataset.csv"
-csv_text = csv_path.read_text(encoding="utf-8")
+
+class CleanedDatasetResult(BaseModel):
+    cleaned_data: List[Dict[str, Any]] = Field(
+        description="Cleaned rows as list of objects"
+    )
+    issues_found: List[str] = Field(description="List of detected issues")
+    changes_made: List[str] = Field(description="List of changes applied in order")
+    warnings: List[str] = Field(description="Assumptions or warnings")
 
 
-# interaction
-interaction = client.interactions.create(
-    model="gemini-3.5-flash-lite",
-    system_instruction=(instruction),
-    input=f"Please clean the following dataset:\n\n{csv_text}",
-    response_format={
-        "type": "text",
-        "mime_type": "application/json",
-    },
-)
+def parse_input_file(file_bytes: bytes, filename: str) -> Tuple[pd.DataFrame, str]:
+    """Reads any supported input file into a dataframe and text representation"""
+    if isinstance(file_bytes, str):
+        file_bytes = file_bytes.encode("utf-8")
 
-data = json.loads(interaction.output_text)
-print(data)
+    ext = filename.lower().rsplit(".", 1)[-1]
+
+    if ext == "parquet":
+        df = pd.read_parquet(io.BytesIO(file_bytes))
+    elif ext == "tsv":
+        df = pd.read_csv(io.BytesIO(file_bytes), sep="\t")
+    elif ext == "json":
+        df = pd.read_json(io.BytesIO(file_bytes))
+    elif ext in ["txt", "text"]:
+        try:
+            df = pd.read_csv(io.BytesIO(file_bytes))
+        except Exception:
+            text_representation = file_bytes.decode("utf-8", errors="replace")
+            return pd.DataFrame(), text_representation
+    else:  # default to CSV
+        df = pd.read_csv(io.BytesIO(file_bytes))
+
+    # Convert DataFrame to CSV-formatted string for Gemini prompt
+    text_representation = df.to_csv(index=False)
+    return df, text_representation
+
+
+def convert_to_target_file(
+    clean_records: List[Dict[str, Any]], target_format: str
+) -> Tuple[bytes, str, str]:
+    """Converts cleaned records to the requested format bytes and MIME type."""
+    df = pd.DataFrame(clean_records)
+    target_format = target_format.lower().lstrip(".")
+
+    if target_format == "parquet":
+        buf = io.BytesIO()
+        df.to_parquet(buf, index=False)
+        return buf.getvalue(), "application/octet-stream", "parquet"
+    elif target_format == "tsv":
+        return (
+            df.to_csv(index=False, sep="\t").encode("utf-8"),
+            "text/tab-separated-values",
+            "tsv",
+        )
+    elif target_format == "json":
+        return (
+            df.to_json(orient="records", indent=2).encode("utf-8"),
+            "application/json",
+            "json",
+        )
+    else:  # default to CSV
+        return df.to_csv(index=False).encode("utf-8"), "text/csv", "csv"
+
+
+def clean_dataset(
+    file_bytes: bytes,
+    filename: str,
+    target_format: str = "csv",
+    user_prompt: Optional[str] = None,
+) -> dict:
+    """Cleans a dataset using Gemini structured output and converts to the target format."""
+    global client
+    if client is None:
+        key = os.getenv("GEMINIAPI") or os.getenv("GEMINI_API_KEY")
+        if not key:
+            raise ValueError("GEMINIAPI or GEMINI_API_KEY environment variable is not set.")
+        client = genai.Client(api_key=key)
+
+    _, text_representation = parse_input_file(file_bytes, filename)
+
+    user_input = f"Clean the following dataset.\nTarget output format: {target_format}\n"
+    if user_prompt:
+        user_input += f"User instructions: {user_prompt}\n"
+    user_input += f"\nDataset:\n{text_representation}"
+
+    interaction = client.interactions.create(
+        model="gemini-3.5-flash-lite",
+        system_instruction=SYSTEM_INSTRUCTION,
+        input=user_input,
+        response_format={
+            "type": "text",
+            "mime_type": "application/json",
+            "schema": CleanedDatasetResult.model_json_schema(),
+        },
+    )
+
+    result = json.loads(interaction.output_text)
+    cleaned_rows = result.get("cleaned_data", [])
+
+    file_bytes_out, mime_type, file_ext = convert_to_target_file(
+        cleaned_rows, target_format
+    )
+
+    file_base64 = base64.b64encode(file_bytes_out).decode("utf-8")
+
+    return {
+        "file_base64": file_base64,
+        "mime_type": mime_type,
+        "extension": file_ext,
+        "preview_data": cleaned_rows[:50],  # Top 50 rows for on-screen preview
+        "issues_found": result.get("issues_found", []),
+        "changes_made": result.get("changes_made", []),
+        "warnings": result.get("warnings", []),
+    }
+
+
+if __name__ == "__main__":
+    sample_csv_path = pathlib.Path(__file__).parent / "temp_data" / "dummy_dirty_dataset.csv"
+    if sample_csv_path.exists():
+        print(f"Testing clean_dataset with {sample_csv_path.name}...")
+        # Read the first 10 rows for a quick sanity check
+        df_sample = pd.read_csv(sample_csv_path).head(10)
+        sample_bytes = df_sample.to_csv(index=False).encode("utf-8")
+        res = clean_dataset(sample_bytes, "dummy_dirty_dataset.csv", target_format="csv")
+        print("\n--- Cleaning Succeeded! ---")
+        print(f"Extension: {res['extension']}")
+        print(f"MIME type: {res['mime_type']}")
+        print(f"Issues Found ({len(res['issues_found'])}):", res["issues_found"])
+        print(f"Changes Made ({len(res['changes_made'])}):", res["changes_made"])
+        print(f"Warnings ({len(res['warnings'])}):", res["warnings"])
+        print(f"Preview rows: {len(res['preview_data'])}")
+        print("First cleaned row:", res["preview_data"][0] if res["preview_data"] else "None")
