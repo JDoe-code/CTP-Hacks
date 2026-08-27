@@ -61,5 +61,8 @@ GEMINI_API
 Once built, to download dependencies and requirements, use:
 pip3 install -r requirements.txt
 
+To run the backend:
+cd backend
+flask run
 
 Frontend:
