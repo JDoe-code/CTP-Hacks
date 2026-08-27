@@ -4,57 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Home</title>
+    <title>Simplify - AI Data Cleaning</title>
     <link rel="stylesheet" href="../styles/index.css">
   </head>
   <body>
-    <h1>Welcome to Simplify!</h1>
-    <script src="index.js"></script>
-<div class="Simplify">
-        <form id="upload">
-            <div class="file">
-                <label for="input">Upload File:</label>
-                <input type="file" id="input" required>
+    <div class="Simplify">
+        <h1>Welcome to Simplify!</h1>
+        <p class="subtitle">Upload a dataset or paste raw text to clean, standardize, and impute data using Google Gemini AI.</p>
+
+        <div id="error-message" class="error-banner hidden"></div>
+        {% if error %}
+        <div class="error-banner">{{ error }}</div>
+        {% endif %}
+
+        <form id="upload" action="/clean" method="POST" enctype="multipart/form-data">
+            <div class="file file-group">
+                <label for="input">Upload File (.csv, .tsv, .json, .parquet, .txt):</label>
+                <input type="file" id="input" name="dataset" accept=".csv,.tsv,.json,.parquet,.txt">
             </div>
+
+            <div class="divider"><span>OR</span></div>
 
             <div class="form-group">
                 <label for="rawText">Paste Raw Data:</label>
-                <textarea id="rawText" placeholder="Paste your raw data here"></textarea>
+                <textarea id="rawText" name="raw_text" placeholder="Paste your raw CSV, TSV, JSON, or tabular text data here"></textarea>
             </div>
 
             <div class="form-group">
-                <label for="prompt">Prompt:</label>
-                <textarea id="prompt" placeholder="Enter instructions for Gemini"></textarea>
+                <label for="prompt">Custom Instructions (Prompt):</label>
+                <textarea id="prompt" name="prompt" placeholder="Optional: Enter instructions for Gemini (e.g. 'Format dates as YYYY-MM-DD, capitalize country names, remove test emails')"></textarea>
             </div>
 
-            <div class="file">
-                <label for="option">Export Format:</label>
-                <select id="option">
-                    <option value=".csv">.csv</option>
-                    <option value=".tsv">.tsv</option>
-                    <option value=".json">.json</option>
-                    <option value=".parquet">.parquet</option>
-                </select>
+            <div class="form-row">
+                <div class="file form-group-half">
+                    <label for="option">Export Format:</label>
+                    <select id="option" name="output_format">
+                        <option value=".csv">.csv (Comma Separated)</option>
+                        <option value=".tsv">.tsv (Tab Separated)</option>
+                        <option value=".json">.json (JSON Array)</option>
+                        <option value=".parquet">.parquet (Apache Parquet)</option>
+                    </select>
+                </div>
+
+                <div class="form-group form-group-half">
+                    <label for="missingStrategy">Missing Values Handling:</label>
+                    <select id="missingStrategy" name="missing_strategy">
+                        <option value="mean">Replace with Mean (Average)</option>
+                        <option value="median">Replace with Median</option>
+                        <option value="mode">Replace with Mode (Most Frequent)</option>
+                        <option value="drop">Drop Rows with Missing Data</option>
+                    </select>
+                </div>
             </div>
 
-             <div class="form-group">
-                <label for="missingStrategy">Missing Values Handling:</label>
-                <select id="missingStrategy">
-                    <option value="mean">Replace with Mean (Average)</option>
-                    <option value="median">Replace with Median</option>
-                    <option value="mode">Replace with Mode</option>
-                    <option value="drop">Drop Rows with Missing Data</option>
-                </select>
-            </div>
-
-
-            <button type="submit" id="submit">Clean Data</button>
+            <button type="submit" id="submit">Clean Data with Gemini</button>
         </form>
 
-        <div id="load" class="hidden">Cleaning...</div>
-        
+        <div id="load" class="hidden">
+            <div class="spinner"></div>
+            <div class="load-text">Cleaning your dataset with Gemini AI...</div>
+            <div class="load-subtext">Analyzing inconsistencies, imputing values, and standardizing schemas</div>
         </div>
     </div>
-</body>
+
+    <script src="index.js"></script>
+  </body>
 </html>
 
