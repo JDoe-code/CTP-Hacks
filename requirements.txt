@@ -1,4 +1,9 @@
+Flask
+requests
 google-genai   
-load_dotenv
-
-
+python-dotenv
+pandas
+pydantic
+pyarrow
+gunicorn
+matplotlib
