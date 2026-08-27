@@ -10,7 +10,7 @@ Tech Stack: HTML, CSS, JavaScript, Flask, Deployment on Render
 
 Workflow:
 There will be two main branches, frontend and backend master branches, and each team member will get their own frontend and backend branch. 
-- only push to the main frontend / backend branch if the branch is still working with the main of the other branch. For example, if Isaiah is working on backend/Isaiah, then that feature should be working in connection with the main backend branch. Testing should be done before pushing.
+- Only push to the main frontend / backend branch if the branch is still working with the main of the other branch. For example, if Isaiah is working on backend/Isaiah, then that feature should be working in connection with the main backend branch. Testing should be done before pushing.
 
 Features: 
 - Choices of data cleaning techniques, for both structured and unstructured formats
