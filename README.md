@@ -56,7 +56,7 @@ Windows:
 .venv\Scripts\activate
 
 Environment variable(s) being read in: 
-GEMINI_API
+GEMINI_API=
 
 Once built, to download dependencies and requirements, use:
 pip3 install -r requirements.txt
