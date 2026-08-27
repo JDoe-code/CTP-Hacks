@@ -84,9 +84,16 @@ continue with the parts that are in scope.
 
 class CleaningStep(BaseModel):
     step_number: int = Field(description="Sequential step number (1, 2, 3, ...)")
-    action: str = Field(description="Short summary of the action taken (e.g. 'Standardize date format', 'Trim whitespace', 'Handle missing values')")
-    column: Optional[str] = Field(default=None, description="The column affected by this step, or null if dataset-wide")
-    details: str = Field(description="Detailed explanation of what was changed, row context, and rationale")
+    action: str = Field(
+        description="Short summary of the action taken (e.g. 'Standardize date format', 'Trim whitespace', 'Handle missing values')"
+    )
+    column: Optional[str] = Field(
+        default=None,
+        description="The column affected by this step, or null if dataset-wide",
+    )
+    details: str = Field(
+        description="Detailed explanation of what was changed, row context, and rationale"
+    )
 
 
 class CleanedDatasetResult(BaseModel):
@@ -96,7 +103,7 @@ class CleanedDatasetResult(BaseModel):
     issues_found: List[str] = Field(description="List of detected issues")
     steps: List[CleaningStep] = Field(
         default_factory=list,
-        description="Step-by-step list of cleaning actions performed in order with details"
+        description="Step-by-step list of cleaning actions performed in order with details",
     )
     changes_made: List[str] = Field(description="List of changes applied in order")
     warnings: List[str] = Field(description="Assumptions or warnings")
@@ -167,12 +174,16 @@ def clean_dataset(
     if client is None:
         key = os.getenv("GEMINIAPI") or os.getenv("GEMINI_API_KEY")
         if not key:
-            raise ValueError("GEMINIAPI or GEMINI_API_KEY environment variable is not set.")
+            raise ValueError(
+                "GEMINIAPI or GEMINI_API_KEY environment variable is not set."
+            )
         client = genai.Client(api_key=key)
 
     _, text_representation = parse_input_file(file_bytes, filename)
 
-    user_input = f"Clean the following dataset.\nTarget output format: {target_format}\n"
+    user_input = (
+        f"Clean the following dataset.\nTarget output format: {target_format}\n"
+    )
     if user_prompt:
         user_input += f"User instructions: {user_prompt}\n"
     user_input += f"\nDataset:\n{text_representation}"
@@ -210,13 +221,17 @@ def clean_dataset(
 
 
 if __name__ == "__main__":
-    sample_csv_path = pathlib.Path(__file__).parent / "temp_data" / "dummy_dirty_dataset.csv"
+    sample_csv_path = (
+        pathlib.Path(__file__).parent / "temp_data" / "dummy_dirty_dataset.csv"
+    )
     if sample_csv_path.exists():
         print(f"Testing clean_dataset with {sample_csv_path.name}...")
         # Read the first 10 rows for a quick sanity check
         df_sample = pd.read_csv(sample_csv_path).head(10)
         sample_bytes = df_sample.to_csv(index=False).encode("utf-8")
-        res = clean_dataset(sample_bytes, "dummy_dirty_dataset.csv", target_format="csv")
+        res = clean_dataset(
+            sample_bytes, "dummy_dirty_dataset.csv", target_format="csv"
+        )
         print("\n--- Cleaning Succeeded! ---")
         print(f"Extension: {res['extension']}")
         print(f"MIME type: {res['mime_type']}")
@@ -224,9 +239,14 @@ if __name__ == "__main__":
         print(f"\nSteps Performed ({len(res['steps'])}):")
         for step in res["steps"]:
             col_info = f" [Column: {step['column']}]" if step.get("column") else ""
-            print(f"  Step {step.get('step_number', '-')}: {step.get('action')}{col_info}")
+            print(
+                f"  Step {step.get('step_number', '-')}: {step.get('action')}{col_info}"
+            )
             print(f"    Details: {step.get('details')}")
         print(f"\nChanges Made ({len(res['changes_made'])}):", res["changes_made"])
         print(f"Warnings ({len(res['warnings'])}):", res["warnings"])
         print(f"Preview rows: {len(res['preview_data'])}")
-        print("First cleaned row:", res["preview_data"][0] if res["preview_data"] else "None")
+        print(
+            "First cleaned row:",
+            res["preview_data"][0] if res["preview_data"] else "None",
+        )
