@@ -2,7 +2,7 @@
 
 App Name: Simplify 
 
-Team members: Isaiah, Simon, Jiarong
+Team members: Isaiah, Simon, Jiarong, Ludwin
 
 Idea: Data cleaning web app; Raw data from datasets usually arrives with inconsistencies that don’t make it all usable just yet, including missing data points, outliers, duplicate data, unstandardized data, or a lack of the necessary format that is needed. Once these are all checked as well, the data must be validated for 
 
